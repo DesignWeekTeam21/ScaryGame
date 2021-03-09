@@ -279,7 +279,7 @@ MonoBehaviour:
   m_maxHorizontalSpeed: 4.5
   velocity: {x: 0, y: 0, z: 0}
   heldObject: {fileID: 0}
-  footstepDelay: 0.75
+  footstepDelay: 0.65
 --- !u!50 &496188495
 Rigidbody2D:
   serializedVersion: 4
@@ -575,12 +575,10 @@ MonoBehaviour:
   - {fileID: 8300000, guid: ad6d0d69bb867594fbb60830e4b09b79, type: 3}
   - {fileID: 8300000, guid: 9303c73d3b5f5374098e03e4cd68ef3d, type: 3}
   playerFootsteps:
-  - {fileID: 8300000, guid: 7a2f8f93cf887df43bc9b15e1d8fb778, type: 3}
-  - {fileID: 8300000, guid: 83c407212e8b6d74ab849a83bda63efb, type: 3}
-  - {fileID: 8300000, guid: f4bf3ed41fdaf97479fc7320d6d4c0c3, type: 3}
-  - {fileID: 8300000, guid: 00f42d2a7966b314c9fc66f685ecbc63, type: 3}
-  - {fileID: 8300000, guid: e0a1185653eaecc42914b7ab3d18d96a, type: 3}
-  playSoundDelay: 5
+  - {fileID: 8300000, guid: 8cc750365a7ea6b4dbe17c5a1b2b0dbe, type: 3}
+  - {fileID: 8300000, guid: b875190dbda23054eb0e4f8ac95224e3, type: 3}
+  - {fileID: 8300000, guid: fc177c68d485aa24eba5360b0fa52397, type: 3}
+  playSoundDelay: 15
 --- !u!4 &681823500
 Transform:
   m_ObjectHideFlags: 0
@@ -607,7 +605,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.172
+  m_Volume: 0.449
   m_Pitch: 1
   Loop: 0
   Mute: 0

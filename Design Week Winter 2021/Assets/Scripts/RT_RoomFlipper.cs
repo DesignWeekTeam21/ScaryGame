@@ -27,7 +27,7 @@ public class RT_RoomFlipper : MonoBehaviour
             if (other.gameObject.tag == "Player")
             {
 
-                RT_MoveBasic.instance.transform.position = teleportLocation.position;
+                PlayerController.instance.transform.position = teleportLocation.position;
             }
         }
     }

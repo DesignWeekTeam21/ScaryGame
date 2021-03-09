@@ -5,24 +5,31 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public static PlayerController instance = null;
+    private SpriteRenderer spriteRenderer;
+    private Animator m_animator;
+    private Rigidbody2D rb;
+
     public enum FacingDirection { Left, Right }
 
     private Vector2 input;
     private Vector2 lastmovement;
 
-    [SerializeField]
-    private float m_accelerationTimeFromRest;
-
-    [SerializeField]
-    private float m_decelerationTimeToRest;
-
-    [SerializeField]
-    private float m_maxHorizontalSpeed;
-
-    private Rigidbody2D rb;
+    [SerializeField] private float m_accelerationTimeFromRest;
+    [SerializeField] private float m_decelerationTimeToRest;
+    [SerializeField] private float m_maxHorizontalSpeed;
 
     public Vector3 velocity;
     private FacingDirection lastdir;
+
+    private int IsWalkingProperty;
+    private int IsGrabbingProperty;
+
+    public GameObject heldObject;
+    private bool isGrabbingObject;
+
+    public float footstepDelay;
+    private float footstepTimer;
+   
 
     public bool IsWalking()
     {
@@ -34,6 +41,17 @@ public class PlayerController : MonoBehaviour
         {
             return false;
         }
+    }
+
+    public bool IsGrabbing()
+    {
+        if (Input.GetKey(KeyCode.E))
+        {
+            return true;
+            
+        }
+
+        return false;
     }
 
     public FacingDirection GetFacingDirection()
@@ -50,29 +68,100 @@ public class PlayerController : MonoBehaviour
         }
         return lastdir;
     }
+
     private void Awake()
     {
         if (instance == null)
             instance = this;
         else if (instance != this)
             Destroy(gameObject);
+
+        m_animator = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+
+        IsWalkingProperty = Animator.StringToHash("isWalking");
+        IsGrabbingProperty = Animator.StringToHash("isGrabbing");
     }
 
-        // Start is called before the first frame update
-        void Start()
+    void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         velocity = new Vector2(0, 0);
     }
 
-    // Update is called once per frame
     void Update()
     {
-        float acceleration = m_maxHorizontalSpeed / m_accelerationTimeFromRest;
-        float deceleration = m_maxHorizontalSpeed / m_decelerationTimeToRest;
+        HandleAnimations();
+        HandleMovement();
 
+        if (isGrabbingObject)
+        {
+            GrabObject();
+        }
+
+        if (IsWalking())
+        {
+            if (footstepTimer < footstepDelay)
+            {
+                footstepTimer += Time.deltaTime;
+                Debug.Log(footstepTimer);
+            }
+            else
+            {
+                GameManager.instance.PlayFootStep();
+                footstepTimer = 0;
+            }
+        }
         
+    }
 
+    private void FixedUpdate()
+    {
+        rb.velocity = new Vector2(velocity.x * input.x, (velocity.y));
+    }
+
+    void GrabObject()
+    {
+        switch (GetFacingDirection())
+        {
+            case FacingDirection.Left:
+                heldObject.transform.position = transform.position + (transform.right * -0.7f);
+                break;
+            case FacingDirection.Right:
+                heldObject.transform.position = transform.position + (transform.right * 0.7f);
+
+                break;
+        }
+    }
+
+    void HandleAnimations()
+    {
+        switch (GetFacingDirection())
+        {
+            case FacingDirection.Left:
+                spriteRenderer.flipX = true;
+                if (heldObject)
+                {
+                    heldObject.GetComponent<SpriteRenderer>().flipX = true;
+                }
+                break;
+            case FacingDirection.Right:
+                spriteRenderer.flipX = false;
+                if (heldObject)
+                {
+                    heldObject.GetComponent<SpriteRenderer>().flipX = false;
+                }
+                break;
+            default:
+                break;
+        }
+
+        m_animator.SetBool(IsWalkingProperty, IsWalking());
+        m_animator.SetBool(IsGrabbingProperty, IsGrabbing());
+    }
+
+    void HandleMovement()
+    {
         input = NewBehaviourScript.GetDirectionalInput();
 
         if (IsWalking())
@@ -88,10 +177,18 @@ public class PlayerController : MonoBehaviour
 
         velocity.x = Mathf.Clamp(velocity.x, 0, m_maxHorizontalSpeed);
     }
-    private void FixedUpdate()
+
+    private void OnTriggerStay2D(Collider2D collision)
     {
-        rb.velocity = new Vector2(velocity.x * input.x, (velocity.y));
+        if(collision.tag == "Can" && IsGrabbing())
+        {
+            isGrabbingObject = true;
+            heldObject = collision.gameObject;
+        }
+
+        if(collision.tag == "Plant" && heldObject && IsGrabbing())
+        {
+            heldObject.GetComponent<SpriteRenderer>().enabled = false;
+        }
     }
-
-
 }

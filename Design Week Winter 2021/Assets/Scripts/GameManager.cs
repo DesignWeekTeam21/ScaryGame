@@ -14,10 +14,26 @@ public class GameManager : MonoBehaviour
     [SerializeField] List<AudioClip> playerFootsteps = new List<AudioClip>();
     private List<AudioClip> activePlayerFootsteps = new List<AudioClip>();
 
+    public AudioClip lockingDoor;
+
     public float playSoundDelay;
     private float playSoundTimer = 0;
 
     public int playerTasksCompleted = 0;
+
+    [Header("Quest Items")]
+
+    private bool movedWateringCan = false;
+    [SerializeField] public GameObject wateringCan;
+    [SerializeField] Transform wateringCanMovePosition;
+
+    public GameObject catFood;
+    public GameObject catBowl;
+    public Sprite filledCatBowl;
+    private bool updatedCatBowl = false;
+    public GameObject flashlight;
+    public GameObject key;
+    
 
     private void Awake()
     {
@@ -39,6 +55,22 @@ public class GameManager : MonoBehaviour
         {
             PlayCreepSound();
             playSoundTimer = 0;
+        }
+
+        QuestUpdates();
+    }
+
+    void QuestUpdates()
+    {
+        if (PlayerController.instance.reachedKitchen && !movedWateringCan)
+        {
+            wateringCan.transform.position = wateringCanMovePosition.position;
+            movedWateringCan = true;
+        }
+
+        if(playerTasksCompleted >= 3)
+        {
+            Checklist.instance.ShowFinalTask();
         }
     }
 

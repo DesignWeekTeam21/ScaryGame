@@ -7,8 +7,8 @@ public class PlayButton : MonoBehaviour
     public void Play()
     {
 
-
-        SceneManager.LoadScene("RoomTransitions");//open scene called GameScene
+       
+        SceneManager.LoadScene("RoomTransitions");//open scene called RoomTransitions
 
 
     }

@@ -15,8 +15,12 @@ public class RT_Camera : MonoBehaviour
     [SerializeField]
     private bool lookAt = true;
 
+    [SerializeField] Vector2 minimumBoundary = Vector2.zero;
+    [SerializeField] Vector2 maximumBoundary = Vector2.zero;
+
     private void Update()
     {
+        //ClampCameraBounds();
         Refresh();
     }
 
@@ -48,5 +52,12 @@ public class RT_Camera : MonoBehaviour
         {
             transform.rotation = target.rotation;
         }
+    }
+
+    void ClampCameraBounds()
+    {
+        //Clamp boundaries
+        transform.position = new Vector3(Mathf.Clamp(transform.position.x, minimumBoundary.x, maximumBoundary.x),
+            Mathf.Clamp(transform.position.y, minimumBoundary.y, maximumBoundary.y), transform.position.z);
     }
 }

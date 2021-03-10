@@ -11,8 +11,10 @@ public class Dialogue : MonoBehaviour
 
     // Create a list to put all dialogue, change the texture in main unity window 
     public List<string> dialogues;
+    public List<string> guides;
 
     public Text dialogue;
+    public Text guide;
 
     // Start is called before the first frame update
     void Start()
@@ -30,5 +32,9 @@ public class Dialogue : MonoBehaviour
     public void printDialogue(int i)
     {
         dialogue.text = dialogues[i];
+    }
+    public void printGuide(int i)
+    {
+        guide.text = guides[i];
     }
 }

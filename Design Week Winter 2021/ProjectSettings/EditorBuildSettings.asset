@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/RoomTransitions.unity
+    guid: 472b7d6656a60e04b9ff58da3f2068df
   m_configObjects: {}

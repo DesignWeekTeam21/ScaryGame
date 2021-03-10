@@ -48,7 +48,6 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKey(KeyCode.E))
         {
             return true;
-            
         }
 
         return false;
@@ -104,7 +103,7 @@ public class PlayerController : MonoBehaviour
             if (footstepTimer < footstepDelay)
             {
                 footstepTimer += Time.deltaTime;
-                Debug.Log(footstepTimer);
+                //Debug.Log(footstepTimer);
             }
             else
             {
@@ -189,6 +188,9 @@ public class PlayerController : MonoBehaviour
         if(collision.tag == "Plant" && heldObject && IsGrabbing())
         {
             heldObject.GetComponent<SpriteRenderer>().enabled = false;
+            isGrabbingObject = false;
+            heldObject = null;
+            GameManager.instance.playerTasksCompleted++;
         }
     }
 }

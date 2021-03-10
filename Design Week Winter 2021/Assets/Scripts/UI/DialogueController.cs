@@ -9,8 +9,11 @@ public class DialogueController : MonoBehaviour
     /// </summary>
 
     GameObject canvas;
-    GameObject Text;
+    public GameObject Text;
+    public GameObject TextBox;
 
+    // number is which dialogue is now appearing
+    // limit is the number of all this part dialogue
     public int number = 0;
     public int limit = 5;
     
@@ -21,7 +24,6 @@ public class DialogueController : MonoBehaviour
     void Start()
     {
         canvas = GameObject.FindGameObjectWithTag("Canvas");
-        Text = GameObject.FindGameObjectWithTag("TextBox");
     }
 
     // Update is called once per frame
@@ -36,6 +38,7 @@ public class DialogueController : MonoBehaviour
         {
             // If we need dialogue, make it appear first
             Text.SetActive(true);
+            TextBox.SetActive(true);
             // use method in dialogue to find texture and print it
             canvas.SendMessage("printDialogue", number);
             // if mouse left button click, go to the next dialogue
@@ -48,6 +51,7 @@ public class DialogueController : MonoBehaviour
             {
                 dialogueAppear = false;
                 Text.SetActive(false);
+                TextBox.SetActive(false);
             }
         }
     }

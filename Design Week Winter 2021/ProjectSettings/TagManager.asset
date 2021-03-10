@@ -6,7 +6,20 @@ TagManager:
   tags:
   - Can
   - Plant
+<<<<<<< HEAD
+  - Kitchen
+  - TextBox
   - Canvas
+  - Key
+  - Bowl
+  - Food
+  - Flashlight
+  - Basement
+  - BackDoor
+  - Basement Room
+=======
+  - Canvas
+>>>>>>> master
   layers:
   - Default
   - TransparentFX
@@ -46,6 +59,9 @@ TagManager:
     locked: 0
   - name: Background
     uniqueID: 2305798657
+    locked: 0
+  - name: Background Objects
+    uniqueID: 2500672647
     locked: 0
   - name: Player
     uniqueID: 1991603351

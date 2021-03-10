@@ -5,7 +5,9 @@ using UnityEngine.UI;
 
 public class Checklist : MonoBehaviour
 {
+    public static Checklist instance = null;
     public float movementSpeed = 5f;
+    public float moveAmount = 200;
 
     private bool checklistUp = false;
 
@@ -15,6 +17,16 @@ public class Checklist : MonoBehaviour
     public Image check1;
     public Image check2;
     public Image check3;
+
+    
+
+    private void Awake()
+    {
+        if (instance == null)
+            instance = this;
+        else if (instance != this)
+            Destroy(gameObject);
+    }
 
     private void Start()
     {
@@ -27,19 +39,17 @@ public class Checklist : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        print(canPress);
-
         if (Input.GetKeyDown(KeyCode.Q))
         {
             if (checklistUp == false && canPress == true)
             {               
-                MoveObjectTo(this.transform, new Vector3(this.transform.position.x, this.transform.position.y + 174, this.transform.position.z), movementSpeed);
+                MoveObjectTo(this.transform, new Vector3(this.transform.position.x, this.transform.position.y + moveAmount, this.transform.position.z), movementSpeed);
                 checklistUp = true;
             }
 
             else if (checklistUp == true && canPress == true)
             {
-                MoveObjectTo(this.transform, new Vector3(this.transform.position.x, this.transform.position.y - 174, this.transform.position.z), movementSpeed);
+                MoveObjectTo(this.transform, new Vector3(this.transform.position.x, this.transform.position.y - moveAmount, this.transform.position.z), movementSpeed);
                 checklistUp = false;
             }
             /*
@@ -48,7 +58,12 @@ public class Checklist : MonoBehaviour
              * the targetPosition Vector3 passed in the argument of MoveObjectTo(); 
              */
         }
-}
+    }
+
+    public void ShowFinalTask()
+    {
+        goToSleep.enabled = true;
+    }
 
     private void MoveObjectTo(Transform objectToMove, Vector3 targetPosition, float moveSpeed)
     {

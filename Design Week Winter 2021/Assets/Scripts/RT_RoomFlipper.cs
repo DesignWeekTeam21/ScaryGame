@@ -6,28 +6,23 @@ public class RT_RoomFlipper : MonoBehaviour
 {
     public Transform teleportLocation;
 
-    
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     private void OnTriggerStay2D(Collider2D other)
     {
         if (Input.GetKey(KeyCode.E))
         {
-            if (other.gameObject.tag == "Player")
+            if (other.gameObject.tag == "Player" && this.gameObject.tag != "Basement")
             {
-
                 PlayerController.instance.transform.position = teleportLocation.position;
+            }
+
+            if(other.gameObject.tag == "Player" && this.gameObject.tag == "Basement" && !PlayerController.instance.holdingFlashlight)
+            {
+                //trigger dialogue here
+            }
+            else if(other.gameObject.tag == "Player" && this.gameObject.tag == "Basement" && PlayerController.instance.holdingFlashlight)
+            {
+                PlayerController.instance.transform.position = teleportLocation.position;
+
             }
         }
     }

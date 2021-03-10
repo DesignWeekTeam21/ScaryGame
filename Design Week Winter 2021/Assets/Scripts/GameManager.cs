@@ -17,6 +17,8 @@ public class GameManager : MonoBehaviour
     public float playSoundDelay;
     private float playSoundTimer = 0;
 
+    public int playerTasksCompleted = 0;
+
     private void Awake()
     {
         if (instance == null)
@@ -70,6 +72,11 @@ public class GameManager : MonoBehaviour
 
         audioSource.PlayOneShot(activePlayerFootsteps[randomNumber]);
         activePlayerFootsteps.RemoveAt(randomNumber);
+    }
+
+    public void PlaySound(AudioClip clip)
+    {
+        audioSource.PlayOneShot(clip);
     }
 
 }

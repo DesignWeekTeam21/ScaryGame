@@ -17,17 +17,24 @@ public class GameManager : MonoBehaviour
     private List<AudioClip> activePlayerFootsteps = new List<AudioClip>();
 
     public AudioClip lockingDoor;
+    public AudioClip ambientMusic;
 
     public float playSoundDelay;
     private float playSoundTimer = 0;
+
+    public float playMusicDelay;
+    private float playMusicTimer = 0;
+    private bool musicPlaying = false;
 
     public int playerTasksCompleted = 0;
 
     [Header("Quest Items")]
 
     private bool movedWateringCan = false;
-    [SerializeField] public GameObject wateringCan;
+    public GameObject wateringCan;
+    public GameObject centrePiece;
     [SerializeField] Transform wateringCanMovePosition;
+    [SerializeField] Transform centrePieceMovePosition;
 
     public GameObject catFood;
     public GameObject catBowl;
@@ -76,6 +83,15 @@ public class GameManager : MonoBehaviour
         {
             GameOverFade();
         }
+
+        playMusicTimer += Time.deltaTime;
+
+        //Start playing music after a delay
+        if (playMusicTimer > playMusicDelay && !musicPlaying)
+        {
+            audioSource.PlayOneShot(ambientMusic);
+            musicPlaying = true;
+        }
     }
 
     void QuestUpdates()
@@ -83,6 +99,8 @@ public class GameManager : MonoBehaviour
         if (PlayerController.instance.reachedKitchen && !movedWateringCan)
         {
             wateringCan.transform.position = wateringCanMovePosition.position;
+            centrePiece.transform.position = centrePieceMovePosition.position;
+            centrePiece.transform.rotation = centrePieceMovePosition.rotation;
             movedWateringCan = true;
         }
 

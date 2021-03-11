@@ -18,6 +18,8 @@ public class Checklist : MonoBehaviour
     public Image check2;
     public Image check3;
 
+    public AudioClip paperCrumple;
+
     
 
     private void Awake()
@@ -45,6 +47,7 @@ public class Checklist : MonoBehaviour
             {               
                 MoveObjectTo(this.transform, new Vector3(this.transform.position.x, this.transform.position.y + moveAmount, this.transform.position.z), movementSpeed);
                 checklistUp = true;
+                GameManager.instance.PlaySound(paperCrumple);
             }
 
             else if (checklistUp == true && canPress == true)

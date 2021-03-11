@@ -66,3 +66,6 @@ TagManager:
   - name: Objects
     uniqueID: 755470751
     locked: 0
+  - name: DarkMask
+    uniqueID: 2152347273
+    locked: 0

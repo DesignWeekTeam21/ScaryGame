@@ -18,6 +18,7 @@ public class GuideController : MonoBehaviour
     public Image A;
     public Image D;
     public Image E;
+    public Image Q;
 
     // a float for count time
     private float t;
@@ -25,12 +26,14 @@ public class GuideController : MonoBehaviour
     private float a = 1;
     private float d = 1;
     private float e = 1;
+    private float q = 1;
 
     // a bool to check if guide appear
     private bool guideAppear = false;
     private bool showedA = false;
     private bool showedD = false;
     private bool showedE = false;
+    private bool showedQ = false;
     // bools check character touch the items
     public bool interact = false;
 
@@ -67,7 +70,7 @@ public class GuideController : MonoBehaviour
                 }
             }
 
-            if(showedA == true && showedD == true && t > 5)
+            if(showedA == true && showedD == true && t > 4)
             {
                 if (showedE == false)
                 {
@@ -75,6 +78,17 @@ public class GuideController : MonoBehaviour
                     Text.SetActive(true);
                     TextBox.SetActive(true);
                     canvas.SendMessage("printGuide", 2);
+                }
+            }
+
+            if(showedA == true && showedD == true && showedE == true && t > 7)
+            {
+                if (showedQ == false)
+                {
+                    Q.gameObject.SetActive(true);
+                    Text.SetActive(true);
+                    TextBox.SetActive(true);
+                    canvas.SendMessage("printGuide", 3);
                 }
             }
 
@@ -101,6 +115,10 @@ public class GuideController : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.E))
             {
                 showedE = true;
+            }
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                showedQ = true;
             }
         }
     }
@@ -133,8 +151,8 @@ public class GuideController : MonoBehaviour
             }
             if (a < 0 && d < 0)
             {
-                Text.SetActive(false);
-                TextBox.SetActive(false);
+                //Text.SetActive(false);
+                //TextBox.SetActive(false);
             }
         }
 
@@ -146,10 +164,25 @@ public class GuideController : MonoBehaviour
             if (e < 0)
             {
                 E.gameObject.SetActive(false);
+                //Text.SetActive(false);
+                //TextBox.SetActive(false);
+            }
+        }
+
+        if (showedQ == true)
+        {
+            Q.gameObject.transform.Translate(0, 15 * Time.deltaTime, 0);
+            Q.color = new Color(Q.color.r, Q.color.g, Q.color.b, q);
+            q -= 2 * Time.deltaTime;
+            if (q < 0)
+            {
+                Q.gameObject.SetActive(false);
                 Text.SetActive(false);
                 TextBox.SetActive(false);
             }
         }
+
+
     }
 
 }

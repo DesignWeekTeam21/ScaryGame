@@ -190,7 +190,7 @@ public class PlayerController : MonoBehaviour
     private void OnTriggerStay2D(Collider2D collision)
     {
         //Pick up watering can
-        if(collision.tag == "Can" && IsGrabbing())
+        if(collision.tag == "Can" && IsGrabbing() && !heldObject)
         {
             isGrabbingObject = true;
             holdingCan = true;
@@ -216,7 +216,7 @@ public class PlayerController : MonoBehaviour
         }
 
         //Pick up flashlight
-        if (collision.tag == "Flashlight" && IsGrabbing())
+        if (collision.tag == "Flashlight" && IsGrabbing() && !heldObject)
         {
             isGrabbingObject = true;
             holdingFlashlight = true;
@@ -233,7 +233,7 @@ public class PlayerController : MonoBehaviour
         }
 
         //Pick up cat food
-        if (collision.tag == "Food" && IsGrabbing())
+        if (collision.tag == "Food" && IsGrabbing() && !heldObject)
         {
             isGrabbingObject = true;
             holdingFood = true;
@@ -253,7 +253,7 @@ public class PlayerController : MonoBehaviour
         }
 
         //Pick up key
-        if(collision.tag == "Key" && IsGrabbing())
+        if(collision.tag == "Key" && IsGrabbing() && !heldObject)
         {
             isGrabbingObject = true;
             holdingKey = true;

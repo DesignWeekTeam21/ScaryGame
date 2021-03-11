@@ -67,8 +67,7 @@ public class GuideController : MonoBehaviour
                 }
             }
 
-            // show guide E when touch the interact items, but just once
-            if (interact == true)
+            if(showedA == true && showedD == true && t > 5)
             {
                 if (showedE == false)
                 {
@@ -77,6 +76,12 @@ public class GuideController : MonoBehaviour
                     TextBox.SetActive(true);
                     canvas.SendMessage("printGuide", 2);
                 }
+            }
+
+            // show guide E when touch the interact items, but just once
+            if (interact == true)
+            {
+                
             }
         }
     }

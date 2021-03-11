@@ -19,7 +19,8 @@ public class RT_RoomFlipper : MonoBehaviour
             if(other.gameObject.tag == "Player" && this.gameObject.tag == "Basement" && !PlayerController.instance.holdingFlashlight)
             {
                 //trigger dialogue here
-                //DialogueController.instance.TextSegmentTwo();
+                Debug.Log("dialogue triggered");
+                DialogueController.instance.TextSegmentTwo();
             }
             else if(other.gameObject.tag == "Player" && this.gameObject.tag == "Basement" && PlayerController.instance.holdingFlashlight)
             {

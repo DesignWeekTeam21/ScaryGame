@@ -57,10 +57,6 @@ public class DialogueController : MonoBehaviour
             {
                 number += 1;
             }
-           
-
-           
-
         }
 
         // if this part is finished, make it disappear

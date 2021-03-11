@@ -6,7 +6,6 @@ TagManager:
   tags:
   - Can
   - Plant
-<<<<<<< HEAD
   - Kitchen
   - TextBox
   - Canvas
@@ -17,9 +16,7 @@ TagManager:
   - Basement
   - BackDoor
   - Basement Room
-=======
-  - Canvas
->>>>>>> master
+  - Bed
   layers:
   - Default
   - TransparentFX

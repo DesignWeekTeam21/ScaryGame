@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/RoomTransitions.unity
+    path: Assets/Scenes/Main Scenes/StartScreen.unity
+    guid: 5bb520d8129cc9f4b8a3e10633dbf020
+  - enabled: 1
+    path: Assets/Scenes/Main Scenes/RoomTransitions.unity
     guid: 472b7d6656a60e04b9ff58da3f2068df
   m_configObjects: {}

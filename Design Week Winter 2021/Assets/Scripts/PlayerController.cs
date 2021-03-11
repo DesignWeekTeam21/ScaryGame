@@ -230,7 +230,6 @@ public class PlayerController : MonoBehaviour
             holdingFlashlight = false;
             heldObject = null;
             Destroy(GameManager.instance.flashlight);
-            GameManager.instance.playerTasksCompleted++;
         }
 
         //Pick up cat food
@@ -277,8 +276,7 @@ public class PlayerController : MonoBehaviour
 
         if(collision.tag == "Bed" && GameManager.instance.playerTasksCompleted >= 3)
         {
-            //game over
-            //fade to black
+            GameManager.instance.GameOver = true;
         }
         
     }

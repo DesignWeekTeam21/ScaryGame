@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -33,7 +35,17 @@ public class GameManager : MonoBehaviour
     private bool updatedCatBowl = false;
     public GameObject flashlight;
     public GameObject key;
-    
+
+    public Image fadeToBlack;
+    public Text gameOverText;
+    private float a = 0;
+    private float d = 0;
+
+    public bool GameOver = false;
+
+    public float reloadSceneDelay;
+    private float reloadSceneTimer = 0;
+
 
     private void Awake()
     {
@@ -43,6 +55,7 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
 
         audioSource = GetComponent<AudioSource>();
+       
     }
 
     private void Update()
@@ -58,6 +71,11 @@ public class GameManager : MonoBehaviour
         }
 
         QuestUpdates();
+
+        if (GameOver)
+        {
+            GameOverFade();
+        }
     }
 
     void QuestUpdates()
@@ -109,6 +127,30 @@ public class GameManager : MonoBehaviour
     public void PlaySound(AudioClip clip)
     {
         audioSource.PlayOneShot(clip);
+    }
+
+    public void GameOverFade()
+    {
+        Debug.Log("this went");
+        //fadeToBlack.gameObject.transform.Translate(0, 15 * Time.deltaTime, 0);
+        fadeToBlack.color = new Color(fadeToBlack.color.r, fadeToBlack.color.g, fadeToBlack.color.b, a);
+        a += 2 * Time.deltaTime;
+
+        if(a >= 1)
+        {
+            //gameOverText.gameObject.transform.Translate(0, 15 * Time.deltaTime, 0);
+            gameOverText.color = new Color(gameOverText.color.r, gameOverText.color.g, gameOverText.color.b, d);
+            d += 2 * Time.deltaTime;
+        }
+
+        reloadSceneTimer += Time.deltaTime;
+
+        if(reloadSceneTimer > reloadSceneDelay)
+        {
+            SceneManager.LoadScene("StartScreen");
+            reloadSceneTimer = 0;
+        }
+        
     }
 
 }

@@ -29,7 +29,7 @@ public class GuideController : MonoBehaviour
     private float q = 1;
 
     // a bool to check if guide appear
-    private bool guideAppear = false;
+    //private bool guideAppear = false;
     private bool showedA = false;
     private bool showedD = false;
     private bool showedE = false;

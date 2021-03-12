@@ -39,7 +39,7 @@ public class GameManager : MonoBehaviour
     public GameObject catFood;
     public GameObject catBowl;
     public Sprite filledCatBowl;
-    private bool updatedCatBowl = false;
+    //private bool updatedCatBowl = false;
     public GameObject flashlight;
     public GameObject key;
 
